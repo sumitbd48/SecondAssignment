@@ -27,7 +27,7 @@ public class RvActivity extends AppCompatActivity {
         Intent intent = getIntent();
         users = (List<User>) intent.getSerializableExtra("allusers");
 
-        UserAdapter userAdapter = new UserAdapter(users);
+        UserAdapter userAdapter = new UserAdapter(users,this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);

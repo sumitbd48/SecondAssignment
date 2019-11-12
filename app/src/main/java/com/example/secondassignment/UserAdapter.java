@@ -1,5 +1,7 @@
 package com.example.secondassignment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,15 @@ import com.example.secondassignment.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
     private List<User> userData = new ArrayList<>();
+    private Context context;
+    User userd;
 
-    public UserAdapter(List<User> userList){
-        this.userData = userList ;
+    public UserAdapter(List<User> userList, Context context){
+        this.userData = userList;
+        this.context = context;
     }
 
 
@@ -36,6 +41,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         final User user = userData.get(position);
         holder.imgUser.setImageResource(user.getImage());
         holder.txtUser.setText(user.getName());
+
+        holder.txtUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailsUser.class);
+                intent.putExtra("Name", userd.getName());
+                intent.putExtra("DoB", userd.getDob());
+                intent.putExtra("Gender", userd.getGender());
+                intent.putExtra("Country", userd.getCountry());
+                intent.putExtra("Phone", userd.getPhone());
+                intent.putExtra("Email", userd.getPhone());
+                intent.putExtra("Image", String.valueOf(userd.getImage()));
+                System.out.println(userd.getImage());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
