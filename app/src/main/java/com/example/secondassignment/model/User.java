@@ -10,14 +10,16 @@ public class User implements Serializable {
     private String country;
     private String phone;
     private String email;
+    private int image;
 
-    public User(String name, String dob, String gender, String country, String phone, String email) {
+    public User(String name, String dob, String gender, String country, String phone, String email, int image) {
         this.name = name;
         this.dob = dob;
         this.gender = gender;
         this.country = country;
         this.phone = phone;
         this.email = email;
+        this.image = image;
     }
 
     public String getName() {
@@ -66,5 +68,13 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 }

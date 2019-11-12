@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.example.secondassignment.model.User;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,11 +31,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
+    private AutoCompleteTextView txtImage;
+    private String [] word = {"sumit", "manish", "deepak", "kushal"};
     EditText txtName, txtDOB, txtCountry, txtPhone, txtEmail;
     RadioGroup RG;
     Spinner spinner;
     Button btnSubmit, btnView;
-    String name, dob, gender, country, phone, email;
+    String name, dob, gender, country, phone, email,image;
     String[] countries = {"Nepal","India","Srilanka","Bhutan","Maldives","Myanmar","Pakistan","Afghanistan"};
 
     List<User> userList = new ArrayList<>();
@@ -66,6 +70,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         btnSubmit = findViewById(R.id.btnSubmit);
         btnView = findViewById(R.id.btnView);
 
+        txtImage = findViewById(R.id.txtImage);
+
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this,R.layout.activity_word_item,word);
+        txtImage.setAdapter(stringArrayAdapter);
+        txtImage.setThreshold(1);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.spinner_values,countries);
         spinner.setAdapter(adapter);
 
@@ -73,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         setSpinnerValue();
         txtDOB.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
+        btnView.setOnClickListener(this);
     }
 
     @Override
@@ -113,10 +124,14 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         dob = txtDOB.getText().toString();
         phone = txtPhone.getText().toString();
         email = txtEmail.getText().toString();
+        image = txtImage.getText().toString();
+
+        String uri = "@drawable/"+image;
+        int resId = getResources().getIdentifier(uri,null,getPackageName());
 
         if (v.getId() == R.id.btnSubmit){
             if (validate()){
-                userList.add(new User(name,dob,gender,country,phone,email));
+                userList.add(new User(name,dob,gender,country,phone,email,resId));
                 Toast.makeText(this, "User Added.", Toast.LENGTH_SHORT).show();
             }
         }
@@ -127,6 +142,10 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         }
 
         if (v.getId() == R.id.btnView){
+
+            Intent intent = new Intent(this,RvActivity.class);
+            intent.putExtra("allusers",(Serializable) userList);
+            startActivity(intent);
 
         }
 
@@ -171,6 +190,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             txtEmail.setError("Invalid email");
             txtEmail.requestFocus();
+            return false;
+        }
+
+        if(TextUtils.isEmpty(image)){
+            txtImage.setError("Image Name must not be empty!");
+            txtImage.requestFocus();
             return false;
         }
 
