@@ -18,9 +18,8 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
-    private List<User> userData = new ArrayList<>();
+    private List<User> userData;
     private Context context;
-    User userd;
 
     public UserAdapter(List<User> userList, Context context){
         this.userData = userList;
@@ -46,14 +45,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,DetailsUser.class);
-                intent.putExtra("Name", userd.getName());
-                intent.putExtra("DoB", userd.getDob());
-                intent.putExtra("Gender", userd.getGender());
-                intent.putExtra("Country", userd.getCountry());
-                intent.putExtra("Phone", userd.getPhone());
-                intent.putExtra("Email", userd.getPhone());
-                intent.putExtra("Image", String.valueOf(userd.getImage()));
-                System.out.println(userd.getImage());
+                intent.putExtra("Name", user.getName());
+                intent.putExtra("DoB", user.getDob());
+                intent.putExtra("Gender", user.getGender());
+                intent.putExtra("Country", user.getCountry());
+                intent.putExtra("Phone", user.getPhone());
+                intent.putExtra("Email", user.getEmail());
+                intent.putExtra("Image", String.valueOf(user.getImage()));
                 context.startActivity(intent);
             }
         });

@@ -37,11 +37,11 @@ public class DetailsUser extends AppCompatActivity {
         int img = Integer.parseInt(image);
 
         imageView.setImageResource(img);
-        nameView.setText(name);
-        dobView.setText(dob);
-        genderView.setText(gender);
-        countryView.setText(country);
-        phoneView.setText(phone);
-        emailView.setText(email);
+        nameView.setText("Name: "+name);
+        dobView.setText("DoB: "+dob);
+        genderView.setText("Gender: "+gender);
+        countryView.setText("Country: "+country);
+        phoneView.setText("Phone: "+phone);
+        emailView.setText("Email: "+email);
     }
 }

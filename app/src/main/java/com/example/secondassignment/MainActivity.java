@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     Spinner spinner;
     Button btnSubmit, btnView;
     String name, dob, gender, country, phone, email,image;
-    String[] countries = {"Nepal","India","Srilanka","Bhutan","Maldives","Myanmar","Pakistan","Afghanistan"};
+    String[] countries = {"--Select Country--","Nepal","India","Srilanka","Bhutan","Maldives","Myanmar","Pakistan","Afghanistan"};
 
     List<User> userList = new ArrayList<>();
 
@@ -172,6 +172,11 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         if (TextUtils.isEmpty(country)){
             txtCountry.setError("Select Country");
             txtCountry.requestFocus();
+            return false;
+        }
+
+        if (country.equals("--Select Country--")){
+            Toast.makeText(this, "Select Country", Toast.LENGTH_SHORT).show();
             return false;
         }
 
