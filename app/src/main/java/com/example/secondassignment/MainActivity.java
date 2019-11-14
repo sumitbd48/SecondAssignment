@@ -32,7 +32,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
     private AutoCompleteTextView txtImage;
-    private String [] word = {"sumit", "manish", "deepak", "kushal"};
+    private String [] word = {"sumit", "manish", "deepak", "kushal","saurav","sunil"};
     EditText txtName, txtDOB, txtCountry, txtPhone, txtEmail;
     RadioGroup RG;
     Spinner spinner;

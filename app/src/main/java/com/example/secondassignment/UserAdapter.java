@@ -26,7 +26,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         this.context = context;
     }
 
-
     @NonNull
     @Override
     public UserAdapter.UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
